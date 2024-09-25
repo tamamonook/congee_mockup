@@ -10,7 +10,8 @@ def echo():
         "args": request.args,
         "form": request.form,
         "json": request.json,
-        "data": request.data.decode("utf-8")
+        "data": request.data.decode("utf-8"),
+        "message": "This message is from Congee mockup"
     }), 200
 
 if __name__ == "__main__":
