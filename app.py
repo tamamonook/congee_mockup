@@ -1,17 +1,22 @@
 from flask import Flask, request, jsonify
-import os
 
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
 def echo():
+    # Check if the request has JSON data or not
+    if request.is_json:
+        request_data = request.json
+    else:
+        request_data = None
+
     return jsonify({
         "method": request.method,
         "headers": dict(request.headers),
         "args": request.args,
         "form": request.form,
-        "json": request.json,
-        "data": request.data.decode("utf-8"),
+        "json": request_data,
+        "data": request.data.decode("utf-8") if request.data else None,
         "message": "This message is from Congee mockup"
     }), 200
 
