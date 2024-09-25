@@ -1,6 +1,12 @@
 version: "3"
 services:
-  congee-mockup1:
+  congee-mockup:
     build: .
     ports:
       - "5000:5000"
+    environment:
+      - CERT_FILE=/certs/cert.pem
+      - KEY_FILE=/certs/key.pem
+    volumes:
+      - ./certs/cert.pem:/certs/cert.pem
+      - ./certs/key.pem:/certs/key.pem

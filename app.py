@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import os
 
 app = Flask(__name__)
 
@@ -15,4 +16,6 @@ def echo():
     }), 200
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    cert_file = os.getenv("CERT_FILE", "cert.pem")
+    key_file = os.getenv("KEY_FILE", "key.pem")
+    app.run(host="0.0.0.0", port=5000, ssl_context=(cert_file, key_file))
